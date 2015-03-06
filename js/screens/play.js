@@ -4,7 +4,11 @@ game.PlayScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {
 		// reset the score
-		game.data.score = 0;
+		game.data.score = 0; 
+                 
+                //me.levelDirector is what to look at as far as maps 
+                //level01 is the name of what map will be loaded.
+                me.levelDirector.loadLevel("level01");
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();

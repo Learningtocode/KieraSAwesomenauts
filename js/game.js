@@ -11,8 +11,9 @@ var game = {
 	
 	// Run on page load.
 	"onload" : function () {
-	// Initialize the video.
-	if (!me.video.init("screen",  me.video.CANVAS, 480, 320, true, 'auto')) {
+	// Initialize the video. 
+        //This is the width and height of our screen.
+	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, '1.0')) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
 	}
@@ -37,7 +38,8 @@ var game = {
 	me.state.change(me.state.LOADING);
 },
 
-	// Run on game resources loaded.
+	// Run on game resources loaded. 
+        //Makes sure we are set to go straight to the play screen.
 	"loaded" : function () {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
