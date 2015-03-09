@@ -9,7 +9,7 @@ game.resources = [
          *  The source of this files shows the path to where the computer must look for the image (which is the type). 
          *  Type more or less is the format of the file. */
         {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
-        {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
+        {name: "player", type:"image", src: "data/img/orcSpear.png"},
  
  
 	/* Atlases 
