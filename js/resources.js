@@ -10,9 +10,10 @@ game.resources = [
          *  Type more or less is the format of the file. */
         {name: "background-tiles", type:"image", src: "data/img/background-tiles.png"},
         {name: "player", type:"image", src: "data/img/orcSpear.png"},
-        {name: "meta-tiles", type:"image", src: "data/map/test.tmx"},
- 
-	/* Atlases 
+        {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
+        {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
+	 
+        /* Atlases 
 	 * @example
 	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
 	 */
