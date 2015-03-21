@@ -8,17 +8,21 @@ game.PlayerEntity = me.Entity.extend({
                 height: 64, 
                 spritewidth: "64", 
                 spriteheight: "64", 
-                getShape: function(){ 
-                    return(new me.Rect(0, 0, 64, 64)).toPolygon();
+                getShape: function(){  
+                    //This is a hit box
+                    return(new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
         }]); 
        
         this.body.setVelocity(5, 20); 
         //No matter where my player goes, it's being followed.
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-          
+           
+        //The numbers in the array are the actual animation sequences. 
+        //Numbers outside the array such as 80 in attack are the speed of the animation.
         this.renderable.addAnimation("idle", [78]);
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); 
+        this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
          
         this.renderable.setCurrentAnimation("idle");
         
@@ -34,16 +38,29 @@ game.PlayerEntity = me.Entity.extend({
             
         }else{
             this.body.vel.x = 0;
-        }   
+        }    
          
-        if(this.body.vel.x !== 0){
+        if(me.input.isKeyPressed("attack")){
+            if(!this.renderable.isCurrentAnimation("attack")){ 
+                //Sets the current animation to attack and once that is over 
+                //goes back to the idle animation
+                this.renderable.setCurrentAnimation("attack", "idle"); 
+                //Makes it so that the next time we start this sequence we begin 
+                //from the first animation not wherever we left off when we  
+                //switched to another animation
+                this.renderable.setAnimationFrame();
+            }
+        }
+        
+       else if(this.body.vel.x !== 0){
         if(!this.renderable.isCurrentAnimation("walk")){
             this.renderable.setCurrentAnimation("walk");
         }  
     }else{
         this.renderable.setCurrentAnimation("idle");
-    }
-         
+    } 
+        
+          
          
          //Delta is the change in time that has happened.  
          //If i don't update it, it will not know it has been changed on the screen.
@@ -63,7 +80,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                  spritewidth: "100", 
                  spriteheight: "100", 
                  getShape: function(){
-                     return (new me.Rect(0, 0, 100, 100).toPolygon)();
+                     return (new me.Rect(0, 0, 100, 70).toPolygon)();
                  }
          }]); 
      this.broken = false; 
