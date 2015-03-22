@@ -9,9 +9,11 @@ game.PlayScreen = me.ScreenObject.extend({
                 //me.levelDirector is what to look at as far as maps 
                 //level01 is the name of what map will be loaded.
                 me.levelDirector.loadLevel("level01"); 
-                 
-                 var player = me.pool.pull("player", 0, 420, {}); 
-                 me.game.world.addChild(player, 5); 
+                  
+                this.resetPlayer(0, 420);
+                  
+                 var gamemanager = me.pool.pull("GameManager", 0, 0, {}); 
+                 me.game.world.addChild(gamemanager, 0);
                    
                   //These are the keys for moving the charater and attacks.
                   me.input.bindKey(me.input.KEY.RIGHT, "right"); 
@@ -33,5 +35,11 @@ game.PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		// remove the HUD from the game world
 		me.game.world.removeChild(this.HUD);
-	}
+	}, 
+          
+        // x and y tell you the parameters for the player on the screen, location
+        resetPlayer: function(x, y){ 
+                 game.data.player = me.pool.pull("player", x, y, {}); 
+                 me.game.world.addChild(game.data.player, 5);        
+        }
 });
