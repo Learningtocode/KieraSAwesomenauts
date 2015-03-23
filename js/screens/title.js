@@ -4,30 +4,74 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); 
-          //Key to connect to our play screen with title screen
-                me.input.bindKey(me.input.KEY.ENTER, "start");
-          //Words onto the title screen 
-          //Renderable means we are drawing
+         
+                //Words onto the title screen 
+                //Renderable means we are drawing
                 me.game.world.addChild(new (me.Renderable.extend({  
                  init: function(){
-                     this._super(me.Renderable, 'init', [5, 10, 30, me.game.viewport.width, me.game.viewport.height]); 
-                     this.font = new me.Font("Arial", 46, "white");
+                     this._super(me.Renderable, 'init', [270, 240, 300, 50]); 
+                     this.font = new me.Font("Arial", 46, "white"); 
+                     //Listening for the mouuse to be clicked down  
+                     //true is telling us to use screen cordinates
+                     me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
                  }, 
                   
                   draw: function(renderer){ 
                       //Draw its on screen
-                      this.font.draw(renderer.getContext(), "Defend Your Village", 450, 130); 
-                      this.font.draw(renderer.getContext(), "ENTER", 250, 530);
-                  }
-            }))); 
+                      this.font.draw(renderer.getContext(), "START A NEW GAME", this.pos.x, this.pos.y); 
+                      
+                  }, 
+                   
+                   update: function(dt){ 
+                       //Making sure we are listening for stuff
+                       return true;
+                   }, 
+                    
+                   newGame: function(){
+                        me.input.releasePointerEvent('pointerdown', this);
+                        me.save.remove('exp');
+                        me.save.remove('exp1');
+                        me.save.remove('exp2');
+                        me.save.remove('exp3');
+                        me.save.remove('exp4');   
+                        me.state.change(me.state.PLAY);
+                    }
+               })));  
+                
+                //Words onto the title screen 
+                //Renderable means we are drawing
+                me.game.world.addChild(new (me.Renderable.extend({  
+                 init: function(){
+                     this._super(me.Renderable, 'init', [380, 340, 250, 50]); 
+                     this.font = new me.Font("Arial", 46, "white"); 
+                     //Listening for the mouuse to be clicked down  
+                     //true is telling us to use screen cordinates
+                     me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
+                 }, 
+                  
+                  draw: function(renderer){ 
+                      //Draw its on screen
+                      this.font.draw(renderer.getContext(), "CONTINUE", this.pos.x, this.pos.y); 
+                      
+                  }, 
+                   
+                   update: function(dt){ 
+                       //Making sure we are listening for stuff
+                       return true;
+                   }, 
+                    
+                   newGame: function(){ 
+                        game.data.exp = me.save.exp; 
+                        game.data.exp1 = me.save.exp1; 
+                        game.data.exp2 = me.save.exp2;
+                        game.data.exp3 = me.save.exp3;
+                        game.data.exp4 = me.save.exp4;
+                        me.input.releasePointerEvent('pointerdown', this);    
+                        me.state.change(me.state.PLAY); 
+                    }
+               }))); 
              
-            //this is an event handler 
-            //It listens for when someone clicks the enter button
-             this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
-                 if(action === "start"){}
-                 me.state.change(me.state.PLAY);
-             });
-              
+         
         },
 	
 	
@@ -35,9 +79,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-        //Makes sure when you click enter during game you don't go back to start
-            me.input.unbindKey(me.input.KEY.ENTER);  
-        //You don't have to be listening for the enter button 
-            me.event.unsubscribe(this.handler);
+        
 	}
 });

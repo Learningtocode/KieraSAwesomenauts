@@ -7,8 +7,8 @@ var game = {
 		// score
                 //The variable below are global 
 		score : 0, 
-                enemyBaseHealth: 10, 
-                playerBaseHealth: 10, 
+                enemyBaseHealth: 1, 
+                playerBaseHealth: 1, 
                 enemyCreepHealth: 10, 
                 playerHealth: 10, 
                 enemyCreepAttack: 1, 
@@ -50,7 +50,9 @@ var game = {
 		window.onReady(function () {
 			me.plugin.register.defer(this, debugPanel, "debug");
 		});
-	}
+	} 
+         
+         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
