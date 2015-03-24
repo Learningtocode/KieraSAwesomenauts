@@ -39,7 +39,7 @@ game.PlayerEntity = me.Entity.extend({
       
     setAttributes: function(){
         this.health = game.data.playerHealth;
-        this.body.setVelocity(game.dataplayerMoveSpeed, 20); 
+        this.body.setVelocity(game.data.playerMoveSpeed, 20); 
         this.attack = game.data.playerAttack;
      }, 
       
@@ -101,15 +101,15 @@ game.PlayerEntity = me.Entity.extend({
         //We don't want our jump function to be involved with the if statements above. 
         //Since the if statement above involves the x axis not the y.
         //the &&'s says that it wouldn't double jump or jump while falling.
-        if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
+        if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
             //This variable is in all entities.
-            this.jumping = true; 
+            this.body.jumping = true; 
             this.body.vel.y -= this.body.accel.y * me.timer.tick;
         } 
         this.attacking = me.input.isKeyPressed("attack");
     },
      
-    loseHealth: function(){
+    loseHealth: function(damage){
         this.health = this.health - damage;
     }, 
      
@@ -138,7 +138,7 @@ game.PlayerEntity = me.Entity.extend({
     //Response.a represents our charater  
     //Response.b represents whatever we are colliding with
         if(response.b.type ==='EnemyBaseEntity'){
-           this.collideWithhEnemyBase(response);
+           this.collideWithEnemyBase(response);
         }else if(response.b.type === 'EnemyCreep'){ 
             this.collideWithEnemyCreep(response);
         }
@@ -197,6 +197,7 @@ game.PlayerEntity = me.Entity.extend({
                    && (Math.abs(ydif) <=40) &&  
                    ((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right") 
                    ){  
+               console.log("returning true");
             // || means or
             //above abs is absolute value
                 this.lastHit = this.now;  

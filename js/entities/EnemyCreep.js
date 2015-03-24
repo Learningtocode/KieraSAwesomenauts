@@ -1,5 +1,6 @@
 /* 
- * description
+ * This keeps all the properities for the emey creeps. 
+ * It contains the collision handler so we can check if we are able to interact with other stuff like the base and player.
  */
 game.EnemyCreep = me.Entity.extend({ 
     //For entities, this will always be the set up
@@ -25,10 +26,10 @@ game.EnemyCreep = me.Entity.extend({
         this.now = new Date().getTime();
         this.body.setVelocity(game.data.playerMoveSpeed, 20); 
           
-         this.type = "EnemyCreep"; 
+        this.type = "EnemyCreep"; 
           
-          this.renderable.addAnimation("walk", [3, 4, 5], 80); 
-          this.renderable.setCurrentAnimation("walk");
+        this.renderable.addAnimation("walk", [3, 4, 5], 80); 
+        this.renderable.setCurrentAnimation("walk");
     },  
      
     loseHealth: function(damage){
@@ -44,7 +45,7 @@ game.EnemyCreep = me.Entity.extend({
         //It's going to refresh every single time
         this.now = new Date().getTime();
         //Makes charater move left
-        this.body.vel.x -= this.accel.x * me.timer.tick; 
+        this.body.vel.x -= this.body.accel.x * me.timer.tick; 
         //Checks if creep is colliding with a player, base, ect. 
         //Will go striaght to the function collide handler
         me.collision.check(this, true, this.collideHandler.bind(this), true);
