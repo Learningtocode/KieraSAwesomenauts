@@ -193,7 +193,7 @@ game.PlayerEntity = me.Entity.extend({
       },
        
     checkAttack: function(xdif, ydif){
-             if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer
+             if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
                    && (Math.abs(ydif) <=40) &&  
                    ((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right") 
                    ){  
