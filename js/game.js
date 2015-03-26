@@ -10,7 +10,7 @@ var game = {
                 enemyBaseHealth: 1, 
                 playerBaseHealth: 1, 
                 enemyCreepHealth: 10, 
-                playerHealth: 10, 
+                playerHealth: 100, 
                 enemyCreepAttack: 1, 
                 playerAttack: 1,   
 //                orcBaseDamage: 10, 
@@ -52,7 +52,10 @@ var game = {
 		});
 	} 
          
-         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
+         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0}); 
+           
+         //112  represents our screen. We have to establish the variable
+         me.state.SPENDEXP = 112;
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");
@@ -81,6 +84,7 @@ var game = {
               
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
+                me.state.set(me.state.SPENDEXP, new game.SpendExp());
 
 		// Start the game.
 		me.state.change(me.state.MENU);
