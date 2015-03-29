@@ -13,9 +13,10 @@ game.GameTimerManager = Object.extend ({
     init: function(x, y, settings){
         //all these variables are global 
         this.now = new Date().getTime();  
-        //Last creep that was maade happen
+        //Last creep that was made happen
         this.lastCreep = new Date().getTime(); 
-        this.paused = false;
+        this.paused = false; 
+        this.alwaysUpdate = true;
     }, 
      
      update: function(){
@@ -90,6 +91,68 @@ game.ExperienceManager = Object.extend({
      
 });
  
- 
+game.SpendGold = Object.extend({ 
+     //This is to spend gold when you are playing the game. 
+     //It is a pause screen where you can spend gold on skills. 
+     init: function(x, y, settings){
+        //all these variables are global 
+        this.now = new Date().getTime();  
+        //variable that will know when the last time we recently bought gold 
+        //the this.lastBuy will only register once
+        this.lastBuy = new Date().getTime(); 
+        this.paused = false; 
+        this.alwaysUpdate = true; 
+        this.updateWhenPaused = true; 
+        //When the game begins, we will not be buying.
+         this.buying = false;
+     }, 
+      
+      update: function(){ 
+          this.now = new Date().getTime(); 
+          //If that buy key is pressed and it has been over a second
+          if(me.input.isKeyPressed("buy") && this.now-this.lasBuy >= 1000){
+               this.lastBuy = this.now;
+               if(!this.buying){
+                  this.startBuying(); 
+               }else{
+                   this.stopBuying();
+               }
+          }   
+          return true;
+      }, 
+     //
+      startBuying: function(){ 
+        //Keeps track of what i am opening
+        this.buying = true;  
+        //When the game will stop
+        me.state.pause(me.state.PLAY);  
+        //Take the position we are currently paused at  
+        game.data.pausePos = me.viewport.localToWorld(0, 0); 
+        //When you add spend gold screen, gold will know where to put itself
+        game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('gold-screen')); 
+        //Make sure my screen is updating   
+        game.data.buyscreen.updateWhenPaused = true;
+        //When user is buying, the user can see what is happening in the background
+        game.data.buyscreen.setOpacity(0.8);
+        //34 is a z factor making the screen go in front (depth)
+        me.game.world.addChild(game.data.buyscreen, 34); 
+        //Player is not moving, no jumping, running, ect.
+        game.data.player.body.setVelocity(0, 0);
+      },  
+      
+      //When we take all the variables within this function to be taken away
+      stopBuying: function(){ 
+          //Keeps track when i am closing
+          this.buying = false;
+          //Unpause the game
+          me.state.resume(me.state.PLAY);  
+          //Go back to player's ability to move again
+          game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
+          //Removing our buy screen 
+          me.game.world.removeChild(game.data.buyscreen);
+      }
+      
+      
+});
        
              
