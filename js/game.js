@@ -52,10 +52,10 @@ var game = {
 		});
 	} 
          
-         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0}); 
+        me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0}); 
            
          //112  represents our screen. We have to establish the variable
-         me.state.SPENDEXP = 112;
+        me.state.SPENDEXP = 112;
 
 	// Initialize the audio.
 	me.audio.init("mp3,ogg");

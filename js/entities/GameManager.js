@@ -31,7 +31,7 @@ game.GameTimerManager = Object.extend ({
           //Math.round will check if you have a multiple of ten 
          //Dividing it by a second
           if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
-             game.data.gold += 1;
+             game.data.gold += (game.data.exp1+1);
          }
       }, 
        
