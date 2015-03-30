@@ -110,7 +110,7 @@ game.SpendGold = Object.extend({
       update: function(){ 
           this.now = new Date().getTime(); 
           //If that buy key is pressed and it has been over a second
-          if(me.input.isKeyPressed("buy") && this.now-this.lasBuy >= 1000){
+          if(me.input.isKeyPressed("buy") && this.now-this.lastBuy >= 1000){
                this.lastBuy = this.now;
                if(!this.buying){
                   this.startBuying(); 
@@ -127,7 +127,7 @@ game.SpendGold = Object.extend({
         //When the game will stop
         me.state.pause(me.state.PLAY);  
         //Take the position we are currently paused at  
-        game.data.pausePos = me.viewport.localToWorld(0, 0); 
+        game.data.pausePos = me.game.viewport.localToWorld(0, 0); 
         //When you add spend gold screen, gold will know where to put itself
         game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('gold-screen')); 
         //Make sure my screen is updating   
@@ -137,8 +137,42 @@ game.SpendGold = Object.extend({
         //34 is a z factor making the screen go in front (depth)
         me.game.world.addChild(game.data.buyscreen, 34); 
         //Player is not moving, no jumping, running, ect.
-        game.data.player.body.setVelocity(0, 0);
-      },  
+        game.data.player.body.setVelocity(0, 0); 
+        me.input.bindKey(me.input.KEY.F1, "F1", true); 
+        me.input.bindKey(me.input.KEY.F1, "F2", true); 
+        me.input.bindKey(me.input.KEY.F1, "F3", true); 
+        me.input.bindKey(me.input.KEY.F1, "F4", true); 
+        me.input.bindKey(me.input.KEY.F1, "F5", true); 
+        me.input.bindKey(me.input.KEY.F1, "F6", true);
+        this.setBuyText();
+      },   
+       
+      setBuyText: function(){
+           game.data.buytext = new (me.Renderable.extend({  
+                 init: function(){
+                     this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]); 
+                     this.font = new me.Font("Arial", 26, "white");  
+                     this.updateWhenPaused = true;
+                     //Listening for the mouuse to be clicked down  
+                     //true is telling us to use screen cordinates
+                     this.alwaysUpdate = true;
+                 },  
+                 
+                  //set exps points
+                  draw: function(renderer){ 
+                      //Draw its on screen
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y);   
+                      this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT", this.pos.x, this.pos.y); 
+                  } 
+                  
+               })); 
+               me.game.world.addChild(game.data.buytext, 35);
+      },
       
       //When we take all the variables within this function to be taken away
       stopBuying: function(){ 
@@ -149,7 +183,15 @@ game.SpendGold = Object.extend({
           //Go back to player's ability to move again
           game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
           //Removing our buy screen 
-          me.game.world.removeChild(game.data.buyscreen);
+          me.game.world.removeChild(game.data.buyscreen); 
+          me.input.bindKey(me.input.KEY.F1, "F1", true); 
+          me.input.unbindKey(me.input.KEY.F1, "F2", true); 
+          me.input.unbindKey(me.input.KEY.F1, "F3", true); 
+          me.input.unbindKey(me.input.KEY.F1, "F4", true); 
+          me.input.unbindKey(me.input.KEY.F1, "F5", true); 
+          me.input.unbindKey(me.input.KEY.F1, "F6", true); 
+          //Remove the ext on buy screen once you resume game 
+          me.game.world.removeChild(game.data.buytext);
       }
       
       
