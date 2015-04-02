@@ -5,47 +5,7 @@
  * 3) Manages creeps, making creeps reappear on a timer
  */ 
 
-game.GameTimerManager = Object.extend ({
-    //Runs all the timers that is not in player entities 
-    //Not an entity and won't appear on screen  
-    //Init function is still the constructer that we will use  
-    //to make everything happen
-    init: function(x, y, settings){
-        //all these variables are global 
-        this.now = new Date().getTime();  
-        //Last creep that was made happen
-        this.lastCreep = new Date().getTime(); 
-        this.paused = false; 
-        this.alwaysUpdate = true;
-    }, 
-     
-     update: function(){
-         this.now = new Date().getTime();  
-          //global variables don't need to be in parameter
-         this.goldTimerCheck(); 
-         this.creepTimerCheck();  
-          
-         return true;
-     }, 
-      
-      goldTimerCheck: function(){ 
-          //Math.round will check if you have a multiple of ten 
-         //Dividing it by a second
-          if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
-             game.data.gold += (game.data.exp1+1);
-         }
-      }, 
-       
-      creepTimerCheck: function(){
-            if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
-             //Creep's timer 
-             this.lastCreep = this.now; 
-             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {}); 
-             //Add creeps to the game screen 
-             me.game.world.addChild(creepe, 5);
-         } 
-      }
-}); 
+
  
 game.HeroDeathManager = Object.extend({
     //Is he dead, if so we will execute some stuff  
@@ -117,10 +77,13 @@ game.SpendGold = Object.extend({
                }else{
                    this.stopBuying();
                }
-          }   
+          }  
+           
+         this.checkBuyKeys();
+         
           return true;
       }, 
-     //
+     
       startBuying: function(){ 
         //Keeps track of what i am opening
         this.buying = true;  
@@ -162,12 +125,12 @@ game.SpendGold = Object.extend({
                   draw: function(renderer){ 
                       //Draw its on screen
                       this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, B TO EXIT. Current Gold: ", this.pos.x, this.pos.y);  
-                      this.font.draw(renderer.getContext(), "Skill 1: Increase Damage. Current Level: " + game.data.skill1 + " Cost: " + ((game.data.skill1) + 1 * 10),this.pos.x, this.pos.y + 40);  
-                      this.font.draw(renderer.getContext(), "Skill 2: Run Faster! Current Level: " + game.data.skill2 + " Cost: " + ((game.data.skill2) + 1 * 10), this.pos.x, this.pos.y + 80);  
-                      this.font.draw(renderer.getContext(), "Skill 3: Increase Health. Current Level:  " + game.data.skill3 + " Cost: " + ((game.data.skill3) + 1 * 10), this.pos.x, this.pos.y + 120);  
-                      this.font.draw(renderer.getContext(), "Q Ability: Speed Burst. Current Level: " + game.data.ability1 + " Cost: " + ((game.data.ability1) + 1 * 10), this.pos.x, this.pos.y + 160);  
-                      this.font.draw(renderer.getContext(), "W Ability: Eat Creep For Health: " + game.data.ability2 + " Cost: " + ((game.data.ability2) + 1 * 10), this.pos.x, this.pos.y + 200);   
-                      this.font.draw(renderer.getContext(), "E Ability: Throw Your Spear: " + game.data.ability3 + " Cost: " + ((game.data.ability3) + 1 * 10), this.pos.x, this.pos.y + 240); 
+                      this.font.draw(renderer.getContext(), "Skill 1: Increase Damage. Current Level: " + game.data.skill1 + " Cost: " + ((game.data.skill1+1)*10),this.pos.x, this.pos.y + 40);  
+                      this.font.draw(renderer.getContext(), "Skill 2: Run Faster! Current Level: " + game.data.skill2 + " Cost: " + ((game.data.skill2+1)*10), this.pos.x, this.pos.y + 80);  
+                      this.font.draw(renderer.getContext(), "Skill 3: Increase Health. Current Level:  " + game.data.skill3 + " Cost: " + ((game.data.skill3+1)*10), this.pos.x, this.pos.y + 120);  
+                      this.font.draw(renderer.getContext(), "Q Ability: Speed Burst. Current Level: " + game.data.ability1 + " Cost: " + ((game.data.ability1+1)*10), this.pos.x, this.pos.y + 160);  
+                      this.font.draw(renderer.getContext(), "W Ability: Eat Creep For Health: " + game.data.ability2 + " Cost: " + ((game.data.ability2+1)*10), this.pos.x, this.pos.y + 200);   
+                      this.font.draw(renderer.getContext(), "E Ability: Throw Your Spear: " + game.data.ability3 + " Cost: " + ((game.data.ability3+1)*10), this.pos.x, this.pos.y + 240); 
                   } 
                   
                })); 
@@ -192,9 +155,80 @@ game.SpendGold = Object.extend({
           me.input.unbindKey(me.input.KEY.F1, "F6", true); 
           //Remove the ext on buy screen once you resume game 
           me.game.world.removeChild(game.data.buytext);
+      },
+      
+      checkBuyKeys: function() {
+           if(me.input.isKeyPressed("F1")){ 
+               //If I can afford it, I will buy it.
+               if(this.checkCost(1)){
+                   this.makePurchase(1);
+               }
+           }else if(me.input.isKeyPressed("F2")){
+               if(this.checkCost(2)){
+                   this.makePurchase(2);
+               }
+           }else if(me.input.isKeyPressed("F3")){
+               if(this.checkCost(3)){
+                   this.makePurchase(3);
+               }
+           }else if(me.input.isKeyPressed("F4")){
+               if(this.checkCost(4)){
+                   this.makePurchase(4);
+               }
+           }else if(me.input.isKeyPressed("F5")){
+               if(this.checkCost(5)){
+                   this.makePurchase(5);
+               }
+           }else if(me.input.isKeyPressed("F6")){
+               if(this.checkCost(6)){
+                   this.makePurchase(6);
+               }
+           }
+       }, 
+        
+      checkCost: function(skill) { 
+     //If i have more gold than the cost to level up one and I have skill one 
+     //Then I am going to return true. If not it's going to return false.
+         if(skill===1 && (game.data.gold >= ((game.data.skill1+1)*10))){
+            return true; 
+         }else if(skill===2 && (game.data.gold >= ((game.data.skill2+1)*10))){
+            return true; 
+         }else if(skill===3 && (game.data.gold >= ((game.data.skill3+1)*10))){
+            return true; 
+         }else if(skill===4 && (game.data.gold >= ((game.data.ability1+1)*10))){
+            return true; 
+         }else if(skill===5 && (game.data.gold >= ((game.data.ability2+1)*10))){
+            return true; 
+         }else if(skill===6 && (game.data.gold >= ((game.data.ability3+1)*10))){
+            return true; 
+         }else{
+             return false;
+         }
+        }, 
+          
+    //This is actually where we are going to make our changes base our purchase.
+      makePurchase: function(skill) { 
+            if(skill === 1){
+            game.data.gold -= ((game.data.skill1 +1)* 10); 
+            game.data.skill1 += 1; 
+            game.data.playerAttack += 1;  
+          }else if(skill ===2){
+            game.data.gold -= ((game.data.skill2 + 1) * 10);
+            game.data.skill2 += 1; 
+          }else if(skill ===3){
+            game.data.gold -= ((game.data.skill3 +1)* 10); 
+            game.data.skill3 += 1; 
+          }else if(skill ===4){
+            game.data.gold -= ((game.data.ability1 +1)* 10); 
+            game.data.ability1 += 1; 
+          }else if(skill ===5){
+            game.data.gold -= ((game.data.ability2 +1)* 10); 
+            game.data.ability2 += 1; 
+          }else if(skill ===6){
+            game.data.gold -= ((game.data.ability3 +1)* 10); 
+            game.data.ability3 += 1; 
+          }
       }
-      
-      
 });
        
              
