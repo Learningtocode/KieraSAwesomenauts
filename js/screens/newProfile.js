@@ -7,7 +7,9 @@ game.NewProfile = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('new-screen')), -10); 
-          
+                document.getElementById("input").style.visibility = "visible";
+             
+             
                 me.input.unbindKey(me.input.KEY.B); 
                 me.input.unbindKey(me.input.KEY.Q); 
                 me.input.unbindKey(me.input.KEY.E); 

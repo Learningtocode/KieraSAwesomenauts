@@ -13,8 +13,26 @@
         <link rel="apple-touch-icon" sizes="152x152" href="icons/touch-icon-ipad-retina-152x152.png">
     </head>
     <body>
-        <!-- Canvas placeholder -->
-        <div id="screen"></div>
+        <!-- Canvas placeholder --> 
+        <!-- Anything on the screen is in the div below tags have id -->
+        <div id="screen"></div> 
+        <!--Allows to keep the elements together--> 
+        <!--We can use php since this is a form-->
+        <form id="input" method="post">
+            <div class="field"> 
+                <label for="username">Username</label> 
+                <input type='text' name='username' id='username' autocomplete='off'>   
+            </div>
+             
+            <div class='password'>
+                <label for='password'>Password</label> 
+                <input type='text' name='password' id='password'>
+            </div> 
+            <button type='button' id='register'>Register</button> 
+            <button type='button' id='load'>Load</button> 
+            <button type='button' id='mainmenu'>Main Menu</button> 
+            
+        </form>
 
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
