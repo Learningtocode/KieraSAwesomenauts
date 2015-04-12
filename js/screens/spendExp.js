@@ -13,7 +13,8 @@ game.SpendExp = me.ScreenObject.extend({
                 me.input.bindKey(me.input.KEY.F3, "F3"); 
                 me.input.bindKey(me.input.KEY.F4, "F4"); 
                 me.input.bindKey(me.input.KEY.F5, "F5");  
-                var exp1cost = ((game.data.exp1 + 1) * 10);
+                //Telling javascript to treat game.data.exp1 as a number 
+                var exp1cost = ((Number(game.data.exp1) + 1) * 10);
                 
                 //Words onto the title screen 
                 //Renderable means we are drawing
