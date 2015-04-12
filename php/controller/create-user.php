@@ -17,7 +17,7 @@
     
        
 //If username is greater than 0, following the exact specific requirements.
-    if (!$use->num_rows > 0 && !$ema->num_rows > 0) {
+    if (!$use->num_rows > 0) {
     $query = $_SESSION["connection"]->query("INSERT INTO users SET "
             . "username = '$username', "
             . "password = '$hashedPassword', "

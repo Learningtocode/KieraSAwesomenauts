@@ -28,15 +28,16 @@
             $array["exp2"] = $row["exp2"];
             $array["exp3"] = $row["exp3"]; 
             $array["exp4"] = $row["exp4"];
-            
+           $_SESSION["name"] = $username; 
+        //We are echoing it out this array as one statement using json 
             echo json_encode($array);
         } 
         else {
-           echo "<p>Invalid username and password1</p>"; 
+           echo "Invalid username and password1"; 
         }
     } 
     else {
-        echo "<p>Invalid username and password2</p>";
+        echo "Invalid username and password2";
     }
 
 
