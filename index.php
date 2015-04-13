@@ -1,6 +1,6 @@
 <!DOCTYPE HTML> 
-<?php 
-    require_once("php/controller/create-db.php");
+<?php
+require_once("php/controller/create-db.php");
 ?>
 <html>
     <head>
@@ -29,7 +29,7 @@
                 <label for="username">Username</label> 
                 <input type='text' name='username' id='username' autocomplete='off'>   
             </div>
-             
+
             <div class='password'>
                 <label for='password'>Password</label> 
                 <input type='password' name='password' id='password'>
@@ -37,7 +37,7 @@
             <button type='button' id='register'>Register</button> 
             <button type='button' id='load'>Load</button> 
             <button type='button' id='mainmenu'>Main Menu</button> 
-            
+
         </form>
 
         <!-- melonJS Library -->
@@ -55,7 +55,7 @@
         <script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script> 
         <script type="text/javascript" src="js/entities/EnemyCreep.js"></script> 
         <script type="text/javascript" src="js/gamemanagers/GameManager.js"></script>  
-        <script type="text/javascript" src="js/gamemanagers/GameTimerManager.js"></script> 
+        <script type="text/javascript" src="js/gamemanagers/GameTimeManager.js"></script> 
         <script type="text/javascript" src="js/gamemanagers/SpendGold.js"></script> 
         <script type="text/javascript" src="js/gamemanagers/HeroDeathManager.js"></script>
         <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
@@ -95,64 +95,66 @@
                 }
             });
         </script> 
-         
+
         <script>
-        $("#mainmenu").bind("click", function(){
-        me.state.change(me.state.MENU);   
-        });  
-      //Ajax is a way to update our program while the database is running
-        $("#register").bind("click", function(){
-            $.ajax({
-               type: "POST", 
-               url: "php/controller/create-user.php",
-                //Looks at the username id and see the value passing it in 
-                //as a variable which it will then call username
-                data: {
-                   username: $('#username').val(), 
-                   password: $('#password').val()
-               }, 
-               dataType: "text"
-            }) 
-               .success(function(response){
-                      if(response==="true"){
-                        me.state.change(me.state.PLAY);  
-                      }else{
-                          alert(response);
-                      } 
-                  }) 
-                  .fail(function(response){
-                     alert("Fail");
-                  });
-                }); 
-                 $("#load").bind("click", function(){
-            $.ajax({
-               type: "POST", 
-               url: "php/controller/login-user.php",
-                //Looks at the username id and see the value passing it in 
-                //as a variable which it will then call username
-                data: {
-                   username: $('#username').val(), 
-                   password: $('#password').val()
-               }, 
-               dataType: "text"
-            }) 
-               .success(function(response){
-                      if(response==="Invalid username and password"){ 
-                          alert(response);   
-                      }else{
-                          var data = jQuery.parseJSON(response);
-                          game.data.exp = data["exp"];
-                          game.data.exp1 = data["exp1"];
-                          game.data.exp2 = data["exp2"];
-                          game.data.exp3 = data["exp3"];
-                          game.data.exp4 = data["exp4"];
-                          me.state.change(me.state.SPENDEXP); 
-                      } 
-                  }) 
-                  .fail(function(response){
-                     alert("Fail");
-                  });
-                });
+            $("#mainmenu").bind("click", function() {
+                console.log("mainmenu");
+                me.state.change(me.state.MENU);
+            });
+            //Ajax is a way to update our program while the database is running
+            $("#register").bind("click", function() {
+                $.ajax({
+                    type: "POST",
+                    url: "php/controller/create-user.php",
+                    //Looks at the username id and see the value passing it in 
+                    //as a variable which it will then call username
+                    data: {
+                        username: $('#username').val(),
+                        password: $('#password').val()
+                    },
+                    dataType: "text"
+                })
+                        .success(function(response) {
+                            if (response === "true") {
+                                console.log("registered");
+                                        me.state.change(me.state.PLAY);
+                            } else {
+                                alert(response);
+                            }
+                        })
+                        .fail(function(response) {
+                            alert("Fail");
+                        });
+            });
+            $("#load").bind("click", function() {
+                $.ajax({
+                    type: "POST",
+                    url: "php/controller/login-user.php",
+                    //Looks at the username id and see the value passing it in 
+                    //as a variable which it will then call username
+                    data: {
+                        username: $('#username').val(),
+                        password: $('#password').val()
+                    },
+                    dataType: "text"
+                })
+                        .success(function(response) {
+                            if (response === "Invalid username and password") {
+                                alert(response);
+                            } else {
+                                var data = jQuery.parseJSON(response);
+                                game.data.exp = data["exp"];
+                                game.data.exp1 = data["exp1"];
+                                game.data.exp2 = data["exp2"];
+                                game.data.exp3 = data["exp3"];
+                                game.data.exp4 = data["exp4"];
+                                me.state.change(me.state.SPENDEXP);
+                            }
+                        })
+                        .fail(function(response) {
+                            alert("Fail");
+                        });
+            });
         </script> 
     </body>
 </html>

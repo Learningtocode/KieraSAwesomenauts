@@ -33,7 +33,8 @@ game.PlayerEntity = me.Entity.extend({
     setPlayerTimers: function(){
          //Keeps track of what time it is in the game
         this.now = new Date().getTime(); 
-        this.lastHit = this.now;  
+        this.lastHit = this.now; 
+        this.lastSpear = this.now;
         this.lastAttack = new Date().getTime();
      }, 
       
@@ -64,7 +65,8 @@ game.PlayerEntity = me.Entity.extend({
         //.this defines checkIfDead as a class
         this.dead = this.checkIfDead();   
         //Doing two functions in code
-        this.checkKeyPressesAndMove();     
+        this.checkKeyPressesAndMove();      
+        this.checkAbilityKeys();
         this.setAnimation();
         me.collision.check(this, true, this.collideHandler.bind(this), true);
         //Delta is the change in time that has happened.  
@@ -112,6 +114,27 @@ game.PlayerEntity = me.Entity.extend({
     loseHealth: function(damage){
         this.health = this.health - damage;
     }, 
+    
+    checkAbilityKeys: function(){
+        if(me.input.isKeyPressed("skill1")){
+           // this.speedBurst();
+        }else if(me.input.isKeyPressed("skill2")){
+            // this.eatCreep();
+        }
+        else if(me.input.isKeyPressed("skill3")){
+            this.throwSpear();
+        }
+    }, 
+     
+    throwSpear: function(){ 
+        if(this.lastSpear >= game.data.spearTimer)
+            this.lastSpear = this.now;
+             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {}); 
+             //
+             me.game.world.addChild(creepe, 5);
+         }
+    },
+    
      
     setAnimation: function(){
         if(this.attacking){
