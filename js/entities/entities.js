@@ -127,15 +127,13 @@ game.PlayerEntity = me.Entity.extend({
     }, 
      
     throwSpear: function(){ 
-        if(this.lastSpear >= game.data.spearTimer)
+        if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
             this.lastSpear = this.now;
-             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {}); 
-             //
-             me.game.world.addChild(creepe, 5);
+             var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {}); 
+             me.game.world.addChild(spear, 10);
          }
     },
-    
-     
+
     setAnimation: function(){
         if(this.attacking){
             if(!this.renderable.isCurrentAnimation("attack")){ 

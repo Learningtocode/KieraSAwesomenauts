@@ -7,7 +7,7 @@ game.TitleScreen = me.ScreenObject.extend({
          
                 //Words onto the title screen 
                 //Renderable means we are drawing
-                me.game.world.addChild(new (me.Renderable.extend({  
+                game.date.option1 = me.game.world.addChild(new (me.Renderable.extend({  
                  init: function(){
                      this._super(me.Renderable, 'init', [270, 240, 300, 50]); 
                      this.font = new me.Font("Arial", 46, "white"); 
