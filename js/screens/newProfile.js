@@ -5,7 +5,8 @@ game.NewProfile = me.ScreenObject.extend({
 	/**	
 	 *  action to perform on state change
 	 */
-	onResetEvent: function() {	
+	onResetEvent: function() {
+            //Going to add audio but have to find it
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('new-screen')), -10); 
                 document.getElementById("input").style.visibility = "visible"; 
                 document.getElementById("register").style.visibility = "visible";
