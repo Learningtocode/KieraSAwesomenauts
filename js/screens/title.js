@@ -7,7 +7,8 @@ game.TitleScreen = me.ScreenObject.extend({
          
                 //Words onto the title screen 
                 //Renderable means we are drawing
-                game.date.option1 = me.game.world.addChild(new (me.Renderable.extend({  
+                
+                game.data.option1 = new (me.Renderable.extend ({  
                  init: function(){
                      this._super(me.Renderable, 'init', [270, 240, 300, 50]); 
                      this.font = new me.Font("Arial", 46, "white"); 
@@ -28,15 +29,18 @@ game.TitleScreen = me.ScreenObject.extend({
                    }, 
                     
                    newGame: function(){
-                        me.input.releasePointerEvent('pointerdown', this);     
+                        me.input.releasePointerEvent('pointerdown', this); 
+                        me.input.releasePointerEvent('pointerdown', game.data.option1);
                         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
                         me.state.change(me.state.NEW);
                     }
-               })));  
+               }));  
                 
                 //Words onto the title screen 
                 //Renderable means we are drawing
-                me.game.world.addChild(new (me.Renderable.extend({  
+                me.game.world.addChild(game.data.option1);
+                
+                game.data.option2 = new (me.Renderable.extend({  
                  init: function(){
                      this._super(me.Renderable, 'init', [380, 340, 250, 50]); 
                      this.font = new me.Font("Arial", 46, "white"); 
@@ -57,12 +61,13 @@ game.TitleScreen = me.ScreenObject.extend({
                    }, 
                     
                    newGame: function(){
-                        me.input.releasePointerEvent('pointerdown', this);    
+                        me.input.releasePointerEvent('pointerdown', game.data.option1);    
                         me.state.change(me.state.LOAD); 
                     }
-               }))); 
+               })); 
              
-         
+             me.game.world.addChild(game.data.option2);
+          
         },
 	
 	
