@@ -6,6 +6,7 @@ game.SpendExp = me.ScreenObject.extend({
 	 *  action to perform on state change
 	 */
 	onResetEvent: function() {	
+            //Loads the the exp-screen as a background
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('exp-screen')), -10); 
           
                 me.input.bindKey(me.input.KEY.F1, "F1"); 

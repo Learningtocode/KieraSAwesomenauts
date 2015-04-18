@@ -33,12 +33,14 @@ game.PlayerEntity = me.Entity.extend({
     setPlayerTimers: function(){
          //Keeps track of what time it is in the game
         this.now = new Date().getTime(); 
+        //Date().getTime() will return the number of milliseconds since Jan. 1 1970.
         this.lastHit = this.now; 
         this.lastSpear = this.now;
         this.lastAttack = new Date().getTime();
      }, 
       
     setAttributes: function(){
+        //Calling on variables in game.js and settings it equal to other variables.
         this.health = game.data.playerHealth;
         this.body.setVelocity(game.data.playerMoveSpeed, 20); 
         this.attack = game.data.playerAttack;
@@ -77,6 +79,7 @@ game.PlayerEntity = me.Entity.extend({
     },  
      
     checkIfDead: function(){
+        //If the health is less than or equal to 0, the charater is dead.
          if(this.health <= 0){
             return true;       
         } 
@@ -127,7 +130,8 @@ game.PlayerEntity = me.Entity.extend({
     }, 
      
     throwSpear: function(){ 
-        if(this.lastSpear >= game.data.spearTimer && game.data.ability3 > 0){
+        if((this.now-this.lastSpear) >= game.data.spearTimer*1000 && game.data.ability3 > 0){
+            //Timer for the spear
             this.lastSpear = this.now;
              var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {}, this.facing); 
              me.game.world.addChild(spear, 10);
