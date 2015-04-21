@@ -10,7 +10,7 @@ game.PlayScreen = me.ScreenObject.extend({
                  //level01 is the name of what map will be loaded.
                  me.levelDirector.loadLevel("level01"); 
                   
-                 this.resetPlayer(0, 420);
+                 this.resetPlayer(10, 0);
                   
                  var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {}); 
                  me.game.world.addChild(gameTimerManager, 0);
@@ -23,6 +23,10 @@ game.PlayScreen = me.ScreenObject.extend({
                    
                  var spendGold = me.pool.pull("SpendGold", 0, 0, {});  
                  me.game.world.addChild(spendGold, 0); 
+                 
+                 //z level is high so we don't have to worry if our background is covering it.
+                 game.data.minimap = me.pool.pull("minimap", 10, 10, {}); 
+                 me.game.world.addChild(game.data.minimap, 30);
                  
                  //These are the keys for moving the charater and attacks. 
                  me.input.bindKey(me.input.KEY.B, "buy"); 
