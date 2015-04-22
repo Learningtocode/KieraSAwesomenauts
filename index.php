@@ -62,6 +62,7 @@ require_once("php/controller/create-db.php");
         <script type="text/javascript" src="js/entities/HUD.js"></script>
         <script type="text/javascript" src="js/entities/SpearThrow.js"></script>
         <script type="text/javascript" src="js/entities/MiniMap.js"></script>
+        <script type="text/javascript" src="js/entities/MiniPlayerLocation.js"></script>
 
         <!-- Screens -->  
         <!--Looking at these files for code-->
