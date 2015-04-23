@@ -1,27 +1,7 @@
 /* 
- *  The Game Manager does a few things. 
- * 1) Removes the player when he is dead and resets him. 
- * 2) Adds gold  
- * 3) Manages creeps, making creeps reappear on a timer
+ * 
  */ 
 
-
- 
-game.HeroDeathManager = Object.extend({
-    //Is he dead, if so we will execute some stuff  
-    init: function(x, y, settings){
-        this.alwaysUpdate = true;
-    }, 
-     
-    update: function(){
-        if(game.data.player.dead){ 
-             me.game.world.removeChild(game.data.player);
-             me.state.current().resetPlayer(10, 0);  
-         } 
-         return true;
-    }
-});
-  
 game.ExperienceManager = Object.extend({
      init: function(x, y, settings){
          this.alwaysUpdate = true; 
