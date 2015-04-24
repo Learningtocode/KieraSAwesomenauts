@@ -6,13 +6,14 @@ game.MiniPlayerLocation = me.Entity.extend({
         this.settings = settings;
         //r is radius which is for the circle represented for the player.
         this.r = 5;
-        this.dimension = (this.r+2)*2;
+        this.diameter = (this.r+2)*2;
         this.achorPoiint = new me.Vector2d(0, 0);
         //Keep track of where circle goes
         this.loc = x, y;
         this.settings.width = this.diameter; 
         this.settings.height = this.diameter;
         this.settings.spritewidth = this.diameter; 
+        this.settings.spriteheight = this.diameter;
         this.settings = this.diameter; 
         this.floating = true;
         this.image = me.video.createCanvas(this.settings.width, this.settings.height);

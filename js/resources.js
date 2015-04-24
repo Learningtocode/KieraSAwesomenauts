@@ -20,6 +20,7 @@ game.resources = [
         {name: "new-screen", type:"image", src: "data/img/newpic.png"},
         {name: "spear", type:"image", src: "data/img/spear.png"},
         {name: "minimap", type:"image", src: "data/img/minimap.png"},
+        {name: "treebackdrop", type:"image", src: "data/img/treebackdrop.png"},
         
         /* Atlases 
 	 * @example
@@ -38,7 +39,7 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */	
-
+        {name: "intro", type: "audio", src: "data/bgm/"},
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}

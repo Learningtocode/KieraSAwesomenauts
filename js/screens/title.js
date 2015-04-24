@@ -2,7 +2,12 @@ game.TitleScreen = me.ScreenObject.extend({
 	/**	
 	 *  action to perform on state change
 	 */
-	onResetEvent: function() {	
+	onResetEvent: function() {
+               // initialize the "audio"
+                me.audio.init("mp3,ogg");
+                //play the audio track
+                me.audio.playTrack("Intro");
+            
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); 
          
                 //Words onto the title screen 
@@ -75,6 +80,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-        
+        // stop the current audio track    
+        me.audio.stopTrack();
 	}
 });
