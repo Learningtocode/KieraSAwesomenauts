@@ -3,8 +3,8 @@
  */
 game.MiniMap = me.Entity.extend({ 
     init: function(x, y, settings){
-        this._super(me.Entity, "init", [x, y, {
-              image: "minimap",
+        this._super(me.Entity, 'init', [x, y, {
+              image: 'minimap',
               width: 280,
               height: 156,
               spritewidth: "280",

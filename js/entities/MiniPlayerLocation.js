@@ -42,10 +42,10 @@ game.MiniPlayerLocation = me.Entity.extend({
         }]);
     },
 
-    draw: function(){
+    draw: function(renderer){
         this._super(me.Entity, "draw", [renderer]);
         this.floating = true;
-        renderer.drawImmage(
+        renderer.drawImage(
                 this.image, 
                 0, 0, this.width, this.height,
                 this.pos.x, this.pos.y, this.width, this.height
