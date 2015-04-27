@@ -3,10 +3,8 @@ game.TitleScreen = me.ScreenObject.extend({
 	 *  action to perform on state change
 	 */
 	onResetEvent: function() {
-               // initialize the "audio"
-                me.audio.init("mp3,ogg");
                 //play the audio track
-                me.audio.playTrack("Intro");
+             //   me.audio.playTrack("");
             
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); 
          
@@ -81,6 +79,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
         // stop the current audio track    
-        me.audio.stopTrack();
+     //   me.audio.stopTrack();
 	}
 });
