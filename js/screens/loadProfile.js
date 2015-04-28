@@ -6,6 +6,7 @@ game.LoadProfile = me.ScreenObject.extend({
 	 *  action to perform on state change
 	 */
 	onResetEvent: function() {	
+                me.audio.playTrack("loadsong");
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('load-screen')), -10); 
            
             document.getElementById("input").style.visibility = "visible"; 
@@ -45,7 +46,8 @@ game.LoadProfile = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
             document.getElementById("input").style.visibility = "hidden"; 
-            document.getElementById("load").style.visibility = "hidden";  
+            document.getElementById("load").style.visibility = "hidden";
+            me.audio.stopTrack();
 	}
 });
 

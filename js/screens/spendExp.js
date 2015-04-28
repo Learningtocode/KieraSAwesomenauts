@@ -5,7 +5,8 @@ game.SpendExp = me.ScreenObject.extend({
 	/**	
 	 *  action to perform on state change
 	 */
-	onResetEvent: function() {	
+	onResetEvent: function() {
+            me.audio.playTrack("expsong");
             //Loads the the exp-screen as a background
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('exp-screen')), -10); 
           
@@ -78,6 +79,7 @@ game.SpendExp = me.ScreenObject.extend({
                 me.input.unbindKey(me.input.KEY.F4, "F4"); 
                 me.input.unbindKey(me.input.KEY.F5, "F5"); 
                 me.event.unsubscribe(this.handler);
+                me.audio.stopTrack();
 	}
 });
 
