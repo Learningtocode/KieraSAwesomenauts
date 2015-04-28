@@ -21,6 +21,7 @@ game.resources = [
         {name: "spear", type:"image", src: "data/img/spear.png"},
         {name: "minimap", type:"image", src: "data/img/minimap.png"},
         {name: "treebackdrop", type:"image", src: "data/img/treebackdrop.png"},
+        {name: "pause-screen", type:"image", src: "data/img/treebackdrop.jpg"},
         
         /* Atlases 
 	 * @example
@@ -44,6 +45,7 @@ game.resources = [
           {name: "spendsong", type: "audio", src: "data/bgm/"},
           {name: "expsong", type: "audio", src: "data/bgm/"},
           {name: "loadsong", type: "audio", src: "data/bgm/"},
+          {name: "pausesong", type: "audio", src: "data/bgm/"},
         
 	/* Sound effects. 
 	 * @example
