@@ -20,8 +20,7 @@ game.resources = [
         {name: "new-screen", type:"image", src: "data/img/newpic.png"},
         {name: "spear", type:"image", src: "data/img/spear.png"},
         {name: "minimap", type:"image", src: "data/img/minimap.png"},
-        {name: "treebackdrop", type:"image", src: "data/img/treebackdrop.png"},
-        {name: "pause-screen", type:"image", src: "data/img/treebackdrop.jpg"},
+        {name: "pause-screen", type:"image", src: "data/img/pause.jpg"},
         
         /* Atlases 
 	 * @example

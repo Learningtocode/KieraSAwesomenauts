@@ -26,6 +26,9 @@ game.PlayScreen = me.ScreenObject.extend({
                  var spendGold = me.pool.pull("SpendGold", 0, 0, {});  
                  me.game.world.addChild(spendGold, 0); 
                  
+                 var pauseScreen = me.pool.pull("PauseScreen", 0, 0, {});  
+                 me.game.world.addChild(pauseScreen, 0); 
+                 
                  //z level is high so we don't have to worry if our background is covering it.
                  game.data.minimap = me.pool.pull("minimap", 10, 10, {}); 
                  me.game.world.addChild(game.data.minimap, 30);
@@ -39,6 +42,8 @@ game.PlayScreen = me.ScreenObject.extend({
                  me.input.bindKey(me.input.KEY.LEFT, "left"); 
                  me.input.bindKey(me.input.KEY.SPACE, "jump");
                  me.input.bindKey(me.input.KEY.A, "attack");
+                 //This is to pause my game by pressing P
+                 me.input.bindKey(me.input.KEY.P, "pause"); 
                 
                   
 
