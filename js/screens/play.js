@@ -44,6 +44,7 @@ game.PlayScreen = me.ScreenObject.extend({
                  me.input.bindKey(me.input.KEY.A, "attack");
                  //This is to pause my game by pressing P
                  me.input.bindKey(me.input.KEY.P, "pause"); 
+                 me.input.bindKey(me.input.KEY.M, "map");
                 
                   
 

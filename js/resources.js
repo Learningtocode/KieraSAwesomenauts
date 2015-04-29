@@ -21,6 +21,7 @@ game.resources = [
         {name: "spear", type:"image", src: "data/img/spear.png"},
         {name: "minimap", type:"image", src: "data/img/minimap.png"},
         {name: "pause-screen", type:"image", src: "data/img/pause.jpg"},
+        {name: "Clouds", type:"image", src: "data/img/Clouds.jpg"},
         
         /* Atlases 
 	 * @example
