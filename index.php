@@ -55,6 +55,7 @@ require_once("php/controller/create-db.php");
         <script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
         <script type="text/javascript" src="js/entities/EnemyCreep.js"></script> 
         <script type="text/javascript" src="js/entities/Teammate.js"></script> 
+        <script type="text/javascript" src="js/entities/EnemyObjectEntity.js"></script> 
         <script type="text/javascript" src="js/entities/EnemyHero.js"></script> 
         <script type="text/javascript" src="js/gamemanagers/GameManager.js"></script>  
         <script type="text/javascript" src="js/gamemanagers/GameTimeManager.js"></script> 

@@ -18,11 +18,11 @@ game.EnemyBaseEntity = me.Entity.extend({
      this.alwaysUpdate = true; 
      this.body.onCollision = this.onCollision.bind(this); 
       
-      this.type = "EnemyBaseEntity";  
+     this.type = "EnemyBaseEntity";  
        
-      this.renderable.addAnimation("idle", [0]);  
-      this.renderable.addAnimation("broken", [1]);
-      this.renderable.setCurrentAnimation("idle"); 
+    this.renderable.addAnimation("idle", [0]);  
+    this.renderable.addAnimation("broken", [1]);
+    this.renderable.setCurrentAnimation("idle"); 
       
      }, 
       
