@@ -52,5 +52,6 @@
  <objectgroup name="Bases">
   <object name="PlayerBase" x="72" y="2596" width="60" height="130"/>
   <object name="EnemyBase" x="1334" y="424" width="64" height="128"/>
+  <object name="EnemyObject" x="494" y="2658" width="62" height="72"/>
  </objectgroup>
 </map>

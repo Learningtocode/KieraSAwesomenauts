@@ -15,11 +15,14 @@ var game = {
                 playerHealth: 100, 
                 enemyCreepAttack: 1, 
                 playerAttack: 1,   
+                teammateAttack: 1,
+                enemyheroAttack: 1,
 //                orcBaseDamage: 10, 
 //                orcBaseHealth: 100, 
 //                orcBaseSpeed: 3, 
 //                orcBaseDefense: 0,
                 playerAttackTimer: 1000, 
+                teammateAttackTimer: 1000, 
                 enemyCreepAttackTimer: 1000, 
                 playerMoveSpeed: 5, 
                 createMoveSpeed: 5, 
@@ -27,6 +30,7 @@ var game = {
                 heroDeathManager: "",
                 spearTimer: 15,
                 player: "",  
+                enemyhero:"",
                 //Experience
                 exp: 0,  
                 gold: 0, 
@@ -47,6 +51,7 @@ var game = {
                 buytext: "", 
                 minimap: "",
                 miniPlayer: "",
+                miniEnemyHero: "",
                 pausescreen:"",
                 pausetext: ""
 	},
@@ -96,6 +101,9 @@ var game = {
                 me.pool.register("EnemyBase", game.EnemyBaseEntity); 
                 me.pool.register("EnemyCreep", game.EnemyCreep, true); 
                 me.pool.register("Teammate", game.EnemyCreep, true);
+                me.pool.register("EnemyHero", game.EnemyHero, true);
+                me.pool.register("EnemyObjectEntity", game.EnemyObjectEntity, true);
+                me.pool.register("EnemyHeroDeathManager", game.EnemyHeroDeathManager);
                 me.pool.register("GameTimerManager", game.GameTimerManager); 
                 me.pool.register("HeroDeathManager", game.HeroDeathManager); 
                 me.pool.register("ExperienceManager", game.ExperienceManager); 

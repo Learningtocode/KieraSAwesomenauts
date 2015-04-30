@@ -20,6 +20,9 @@ game.PlayScreen = me.ScreenObject.extend({
                  var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {}); 
                  me.game.world.addChild(heroDeathManager, 0); 
                       
+                 var enemyHeroDeathManager = me.pool.pull("EnemyHeroDeathManager", 0, 0, {}); 
+                 me.game.world.addChild(enemyHeroDeathManager, 0); 
+                 
                  var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {}); 
                  me.game.world.addChild(experienceManager, 0);
                    

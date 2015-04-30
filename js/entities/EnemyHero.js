@@ -96,10 +96,12 @@ game.EnemyHero = me.Entity.extend({
     collideHandler: function(response){ 
     //Response.a represents our charater  
     //Response.b represents whatever we are colliding with
-        if(response.b.type ==='EnemyBaseEntity'){
-           this.collideWithEnemyBase(response);
-        }else if(response.b.type === 'EnemyCreep'){ 
-            this.collideWithEnemyCreep(response);
+        if(response.b.type ==='PlayerBaseEntity'){
+           this.collideWithPlayerBase(response);
+        }else if(response.b.type === 'PlayerEntiiy'){ 
+            this.collideWithPlayer(response);
+        }else if(response.b.type === 'Teammate'){ 
+            this.collideWithTeammate(response);
         }
      },  
      
@@ -135,8 +137,18 @@ game.EnemyHero = me.Entity.extend({
             this.stopMovement(xdif);  
             
             if(this.checkAttack(xdif, ydif)){
-               this.hitCreep(response);
-            };  
+               this.hitPlayer(response); 
+           }
+            },
+         collideWithTeammate: function(response){
+            var xdif = this.pos.x - response.b.pos.x;
+            var ydif = this.pos.y - response.b.pos.y;
+ 
+            this.stopMovement(xdif);  
+            
+            if(this.checkAttackTeammate(xdif, ydif)){
+               this.hitTeammate(response);
+            };
         }, 
       
     stopMovement: function(xdif){
@@ -151,23 +163,23 @@ game.EnemyHero = me.Entity.extend({
             }
       },
        
-//    checkAttack: function(xdif, ydif){ 
-//        //Are the timers good?
-//             if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
-//                   && (Math.abs(ydif) <=40) &&  
-//                   (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right")) 
-//                   ){  
-//               console.log("returning true");
-//            // || means or
-//            //above abs is absolute value
-//                this.lastHit = this.now;  
-//            //if the creeps health is less than our attack, execute code in if statement
-//            return true; 
-//            //If return true, all the code in function check attack will be executed.
-//            } 
-//            return false; 
-//            //if there isn't an attack, the code won't execute
-//      }, 
+    checkAttack: function(xdif, ydif){ 
+        //Are the timers good?
+             if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+                   && (Math.abs(ydif) <=40) &&  
+                   (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right")) 
+                   ){  
+               console.log("returning true");
+            // || means or
+            //above abs is absolute value
+                this.lastHit = this.now;  
+            //if the creeps health is less than our attack, execute code in if statement
+            return true; 
+            //If return true, all the code in function check attack will be executed.
+            } 
+            return false; 
+            //if there isn't an attack, the code won't execute
+      }, 
        
     hitPlayer: function(response){
         if(response.b.health <= game.data.enemyAttack) {
@@ -175,7 +187,30 @@ game.EnemyHero = me.Entity.extend({
                     game.data.gold += 1;
                 }  
                 response.b.loseHealth(game.data.enemyAttack);
-    }
-}); 
+    }, checkAttackTeammate: function(xdif, ydif){ 
+        //Are the timers good?
+             if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+                   && (Math.abs(ydif) <=40) &&  
+                   (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right")) 
+                   ){  
+               console.log("returning true");
+            // || means or
+            //above abs is absolute value
+                this.lastHit = this.now;  
+            //if the creeps health is less than our attack, execute code in if statement
+            return true; 
+            //If return true, all the code in function check attack will be executed.
+            } 
+            return false; 
+            //if there isn't an attack, the code won't execute
+      }, 
+     
+    hitTeammate: function(response){
+        if(response.b.health <= game.data.teammateAttack) {
+                    //adds one gold for a creep kill 
+                    game.data.gold += 1;
+                }  
+                response.b.loseHealth(game.data.teammateAttack);
+}}); 
  
 

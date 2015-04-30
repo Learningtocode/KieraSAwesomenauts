@@ -61,6 +61,7 @@ require_once("php/controller/create-db.php");
         <script type="text/javascript" src="js/gamemanagers/SpendGold.js"></script> 
         <script type="text/javascript" src="js/gamemanagers/PauseScreen.js"></script>
         <script type="text/javascript" src="js/gamemanagers/HeroDeathManager.js"></script>
+        <script type="text/javascript" src="js/gamemanagers/EnemyHeroDeathManager.js"></script>
         <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
         <script type="text/javascript" src="js/entities/HUD.js"></script>
         <script type="text/javascript" src="js/entities/SpearThrow.js"></script>

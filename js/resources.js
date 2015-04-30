@@ -22,6 +22,7 @@ game.resources = [
         {name: "minimap", type:"image", src: "data/img/minimap.png"},
         {name: "pause-screen", type:"image", src: "data/img/pause.jpg"},
         {name: "Clouds", type:"image", src: "data/img/Clouds.jpg"},
+        {name: "crate", type:"image", src: "data/img/crate.jpg"},
         
         /* Atlases 
 	 * @example

@@ -95,7 +95,7 @@ game.Teammate = me.Entity.extend({
                  this.lastHit = this.now;  
                  //makes player call its loseHealth function and passes it a  
                  //damage of 1
-                 response.b.loseHealth(game.data.enemyCreepAttack); 
+                 response.b.loseHealth(game.data.enemyheroAttack); 
              }
          } 
      } 
