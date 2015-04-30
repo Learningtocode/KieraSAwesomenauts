@@ -1,7 +1,6 @@
 /* 
  * 
  */
-
 game.SpendGold = Object.extend({ 
      //This is to spend gold when you are playing the game. 
      //It is a pause screen where you can spend gold on skills. 

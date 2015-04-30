@@ -3,25 +3,26 @@
  */
 game.MiniMap = me.Entity.extend({ 
     init: function(x, y, settings){
+        this.lastMap = new Date().getTime(); 
+        this.now = new Date().getTime(); 
+        this.mapping = false;
         this._super(me.Entity, 'init', [x, y, {
               image: 'minimap',
-              width: 165,
-              height: 336,
-              spritewidth: "165",
-              spriteheight: "336",
+              width: 169,
+              height: 337,
+              spritewidth: "169",
+              spriteheight: "338",
               getShape: function(){
-                  return (new me.Rect(0, 0, 165, 336)).toPolygon();
+                  return (new me.Rect(0, 0, 169, 338)).toPolygon();
               }
         }]);
         //Follow screen cordinates. The mini map will stay where I wanted to stay.
         this.floating = true;
     },
      update: function(){
-         this.lastMap = new Date().getTime(); 
-         this.now = new Date().getTime(); 
-         this.mapping = false;
-          //If that buy key is pressed and it has been over a second
-          if(me.input.isKeyPressed("map") && this.now-this.lastMap >= 1000){
+         this.now = new Date().getTime();
+         //If that buy key is pressed and it has been over a second
+         if(me.input.isKeyPressed("map") && this.now-this.lastMap >= 1000){
                this.lastMap = this.now;
                if(!this.mapping){
                   this.startMapping(); 
@@ -43,6 +44,7 @@ game.MiniMap = me.Entity.extend({
         game.data.minimap = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('minimap')); 
         //34 is a z factor making the screen go in front (depth)
         me.game.world.addChild(game.data.minimap, 34); 
+        this.setBuyText();
       },   
       stopMapping: function(){ 
           //Keeps track when i am closing

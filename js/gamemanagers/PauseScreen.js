@@ -19,7 +19,7 @@ game.PauseScreen = Object.extend({
       update: function(){ 
           this.now = new Date().getTime(); 
           //If that buy key is pressed and it has been over a second
-          if(me.input.isKeyPressed("pause") && this.now - this.lastPause){
+          if(me.input.isKeyPressed("pause") && this.now - this.lastPause >= 1000){
                this.lastPause = this.now;
                if(!this.pausing){
                   this.pause(); 
@@ -40,16 +40,14 @@ game.PauseScreen = Object.extend({
         //When you add spend gold screen, gold will know where to put itself
         game.data.pausescreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('pause-screen')); 
         //Make sure my screen is updating   
-        game.data.buyscreen.updateWhenPaused = true;
-        //The user can see what is happening in the background
-        game.data.buyscreen.setOpacity(0.8);
+        game.data.pausescreen.updateWhenPaused = true;
         //34 is a z factor making the screen go in front (depth)
-        me.game.world.addChild(game.data.buyscreen, 69); 
+        me.game.world.addChild(game.data.pausescreen, 35); 
         //Player is not moving, no jumping, running, ect.
         this.setPause();
       },   
        
-      setPauseText: function(){
+      setPause: function(){
            game.data.pausetext = new (me.Renderable.extend({  
                  init: function(){
                      this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]); 
@@ -59,15 +57,15 @@ game.PauseScreen = Object.extend({
                      //true is telling us to use screen cordinates
                      this.alwaysUpdate = true;
                  },  
-                 
-                  //set exps points
+
                   draw: function(renderer){ 
                       //Draw its on screen
-                      this.font.draw(renderer.getContext(), "PAUSE", this.pos.x, this.pos.y);  
+                      this.font.draw(renderer.getContext(), "PAUSE", this.pos.x, this.pos.y + 40);  
+                      this.font.draw(renderer.getContext(), "PRESS P AGAIN TO RESUME", this.pos.x, this.pos.y + 80);  
                   } 
                   
                })); 
-            //   me.game.world.addChild(game.data.buytext, 35);
+             me.game.world.addChild(game.data.pausetext, 35);
       },
       
       //When we take all the variables within this function to be taken away
@@ -82,7 +80,7 @@ game.PauseScreen = Object.extend({
           me.game.world.removeChild(game.data.pausescreen);  
           //Remove the ext on pause screen once you resume game 
           me.game.world.removeChild(game.data.pausetext);
-      },
+      }
       
 });
        
