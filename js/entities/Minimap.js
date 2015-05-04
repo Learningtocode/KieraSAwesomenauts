@@ -44,7 +44,6 @@ game.MiniMap = me.Entity.extend({
         game.data.minimap = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('minimap')); 
         //34 is a z factor making the screen go in front (depth)
         me.game.world.addChild(game.data.minimap, 34); 
-        this.setBuyText();
       },   
       stopMapping: function(){ 
           //Keeps track when i am closing

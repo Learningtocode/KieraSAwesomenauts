@@ -49,7 +49,7 @@ game.GameTimerManager = Object.extend ({
             if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastTeammate >= 1000)){
              //Creep's timer 
              this.lastTeammate = this.now; 
-             var creepe = me.pool.pull("Teammate", 0, 1000, {}); 
+             var teammate = me.pool.pull("Teammate", 0, 1000, {}); 
              //Add teammates to the game screen 
              me.game.world.addChild(teammate, 5);
          } 
