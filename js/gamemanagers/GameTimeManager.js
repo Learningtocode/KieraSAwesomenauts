@@ -40,7 +40,7 @@ game.GameTimerManager = Object.extend ({
             if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
              //Creep's timer 
              this.lastCreep = this.now; 
-             var creepe = me.pool.pull("EnemyCreep", 0, 1000, {}); 
+             var creepe = me.pool.pull("EnemyCreep", 1000, 0, {}); 
              //Add creeps to the game screen 
              me.game.world.addChild(creepe, 5);
          } 

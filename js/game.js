@@ -11,8 +11,8 @@ var game = {
                 option2: "",
                 enemyBaseHealth: 1, 
                 playerBaseHealth: 1, 
-                enemyCreepHealth: 10, 
-                playerHealth: 100, 
+                enemyCreepHealth: 1, 
+                playerHealth: 5, 
                 enemyCreepAttack: 1, 
                 playerAttack: 1,   
                 teammateAttack: 1,
@@ -32,8 +32,8 @@ var game = {
                 player: "",  
                 enemyhero:"",
                 //Experience
-                exp: 0,  
-                gold: 0, 
+                exp: 4,  
+                gold: 4, 
                 //How to spend experience 
                 ability1: 0, 
                 ability2: 0, 

@@ -8,12 +8,12 @@ game.MiniMap = me.Entity.extend({
         this.mapping = false;
         this._super(me.Entity, 'init', [x, y, {
               image: 'minimap',
-              width: 169,
-              height: 338,
-              spritewidth: "169",
-              spriteheight: "338",
+              width: 177,
+              height: 349,
+              spritewidth: "177",
+              spriteheight: "349",
               getShape: function(){
-                  return (new me.Rect(0, 0, 169, 338)).toPolygon();
+                  return (new me.Rect(0, 0, 177, 349)).toPolygon();
               }
         }]);
         //Follow screen cordinates. The mini map will stay where I wanted to stay.
